@@ -1,6 +1,6 @@
 {
   "name": "internet-poker-protocol",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Module for parsing and creating Internet Poker Protocol 2.0 messages",
   "main": "index.js",
   "scripts": {
