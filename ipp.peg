@@ -1,0 +1,93 @@
+{
+    const extend = require('extend');
+}
+
+start
+ = command
+
+command
+ = command:"IPP" space version:version space info:info { return { command: command, version: version, info: info }; }
+ / command:"BUYIN" space name:name space amt:amt {  return { command: command, name: name, amt: amt }; }
+ / command:"WELCOME" space name:name {  return { command: command, name: name }; }
+ / command:"NEWGAME" space type:"HOLDEM" space low:amt space high:amt space raises:amt { return { command: command, type: type, low: low, high: high, raises: raises }; }
+ / command:"NEWGAME" space type:"DRAW" space low:amt space high:amt space raises:amt { return { command: command, type: type, low: low, high: high, raises: raises }; }
+ / command:"NEWGAME" space type:"STUD" space cards:[57] space low:amt space high:amt space raises:amt { return { command: command, type: type, cards: cards, low: low, high: high, raises: raises }; }
+ / command:"PLAYER" space name:name space amt:amt { return { command: command, name: name, amt: amt }; }
+ / command:"BUTTON" space name:name { return { command: command, name: name }; }
+ / command:"ANTE" space amt:amt { return { command: command, amt: amt }; }
+ / command:"DEAL" space card0:card space card1:card { return { command: command, cards: [ card0, card1 ] }; }
+ / command:"FROM" space name:name space msg:command { return { command: command, name: name, msg: msg }; }
+ / command:"FLOP" space card0:card space card1:card space card2:card { return { command: command, cards: [ card0, card1, card2 ] }; }
+ / command:"TURN" space card:card { return { command: command, card: card }; }
+ / command:"RIVER" space card:card { return { command: command, card: card }; }
+ / command:"DRAW?" { return { command: command }; }
+ / command:"FOLD" { return { command: command }; }
+ / command:"DRAW" space num:"1" space card0:card { return { command: command, num: num, cards: [ card0 ] }; }
+ / command:"DRAW" space num:"2" space card0:card space card1:card { return { command: command, num: num, cards: [ card0, card1 ] }; }
+ / command:"DRAW" space num:"3" space card0:card space card1:card space card2:card { return { command: command, num: num, cards: [ card0, card1, card2 ] }; }
+ / command:"DRAW" space num:"4" space card0:card space card1:card space card2:card space card3:card { return { command: command, num: num, cards: [ card0, card1, card2, card3 ] }; }
+ / command:"DRAW" space num:"5" space card0:card space card1:card space card2:card space card3:card space card4:card { return { command: command, num: num, cards: [ card0, card1, card2, card3, card4 ] }; }
+ / command:"DRAW" space num:[1-5] { return { command: 'DRAW', num: num }; }
+ / command:"DRAWN" space num:"1" space card0:card { return { command: command, num: num, cards: [ card0 ] }; }
+ / command:"DRAWN" space num:"2" space card0:card space card1:card { return { command: command, num: num, cards: [ card0, card1 ] }; }
+ / command:"DRAWN" space num:"3" space card0:card space card1:card space card2:card { return { command: command, num: num, cards: [ card0, card1, card2 ] }; }
+ / command:"DRAWN" space num:"4" space card0:card space card1:card space card2:card space card3:card { return { command: command, num: num, cards: [ card0, card1, card2, card3 ] }; }
+ / command:"DRAWN" space num:"5" space card0:card space card1:card space card2:card space card3:card space card4:card { return { command: command, num: num, cards: [ card0, card1, card2, card3, card4 ] }; }
+ / command:"UP" space card:card { return { command: command, card: card }; }
+ / command:"DOWN" space card:card { return { command: command, card: card }; }
+ / command:"ACTION?" space action:("BLIND"/"STRADDLE"/"OWING") space amt:amt { return { command: command, action: action, amt: amt }; }
+ / command:"BLIND" space amt:amt { return { command: command, amt: amt }; }
+ / command:"TAPOUT" space amt:amt { return { command: command, amt: amt }; }
+ / command:"STRADDLE" space amt:amt { return { command: command, amt: amt }; }
+ / command:"CALL" space amt:amt { return { command: command, amt: amt }; }
+ / command:"RAISE" space amt:amt { return { command: command, amt: amt }; }
+ / command:"OPEN" space amt:amt { return { command: command, amt: amt }; }
+ / command:"CHECK" { return { command: command }; }
+ / command:"SHOW?" { return { command: command }; }
+ / command:"SHOW" space name:name space card0:card space card1:card { return { command: command, name: name, cards: [ card0, card1 ] }; }
+ / command:"SHOW" space handtype:handtype { return extend(true, { command: command }, handtype); }
+ / command:"BEAT?" space handtype:handtype { return extend(true, { command: command }, handtype); }
+ / command:"NO" { return { command: command }; }
+ / command:"YES" space handtype:handtype { return extend(true, { command: command }, handtype); }
+ / command:"WINNER" space name:name space amt:amt space handtype: handtype { return extend(true, { command: command, name: name, amt: amt }, handtype); }
+ / command:"BUSTED" space name:name { return { command: command, name: name }; }
+ / command:"GAMEOVER" space name:name space amt:amt { return { command: command, name: name, amt: amt }; }
+ / command:"OK" space msg:command { return { command: command, msg: msg }; }
+ / command:"ERROR" space info:info { return { command: command, info: info }; }
+ / command:"QUIT" space name:name { return { command: command, name:name }; }
+
+version
+ = version:("2.0.0"/"2.0") { return version; }
+
+info
+ = info:.* { return info.join(''); }
+
+name
+ = name:[A-Za-z0-9]+ { return name.join(''); }
+
+amt
+ = amtHead:[1-9] amtTail:[0-9]* { return parseInt([amtHead].concat(amtTail).join('')); }
+ / amt:"0" { return 0; }
+
+card
+ = rank:rank suit:suit { return rank + suit; }
+
+rank
+ = rank:[23456789TJQKA] { return rank; }
+
+suit
+ = suit:[SDHC] { return suit; }
+
+handtype
+ = hand:"STRAIGHTFLUSH" space rank:rank { return { hand: hand, rank: rank }; }
+ / hand:"FOUROFAKIND" space rank0:rank space rank1:rank { return { hand: hand, ranks: [ rank0, rank1 ] }; }
+ / hand:"FULLHOUSE" space rank0:rank space rank1:rank { return { hand: hand, ranks: [ rank0, rank1 ] }; }
+ / hand:"FLUSH" space rank0:rank space rank1:rank space rank2:rank space rank3:rank space rank4:rank { return { hand: hand, ranks: [ rank0, rank1, rank2, rank3, rank4 ] }; }
+ / hand:"STRAIGHT" space rank:rank { return { hand: hand, rank: rank }; }
+ / hand:"THREEOFAKIND" space rank0:rank space rank1:rank space rank2:rank { return { hand: hand, ranks: [ rank0, rank1, rank2 ] }; }
+ / hand:"TWOPAIR" space rank0:rank space rank1:rank space rank2:rank { return { hand: hand, ranks: [ rank0, rank1, rank2 ] }; }
+ / hand:"ONEPAIR" space rank0:rank space rank1:rank space rank2:rank space rank3:rank { return { hand: hand, ranks: [ rank0, rank1, rank2, rank3 ] }; }
+ / hand:"HIGHCARD" space rank0:rank space rank1:rank space rank2:rank space rank3:rank space rank4:rank { return { hand: hand, ranks: [ rank0, rank1, rank2, rank3, rank4 ] }; }
+
+space
+ = " "

@@ -1,0 +1,64 @@
+{
+  "name": "internet-poker-protocol",
+  "version": "1.0.0",
+  "description": "Module for parsing and creating Internet Poker Protocol 2.0 messages",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "jshint index.js test",
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tcort/internet-poker-protocol.git"
+  },
+  "keywords": [
+    "poker",
+    "ipp",
+    "protocol"
+  ],
+  "author": "Thomas Cort <linuxgeek@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tcort/internet-poker-protocol/issues"
+  },
+  "homepage": "https://github.com/tcort/internet-poker-protocol#readme",
+  "dependencies": {
+    "extend": "^3.0.1",
+    "pegjs": "^0.10.0"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "jshint": "^2.9.4",
+    "mocha": "^3.4.2"
+  },
+  "jshintConfig": {
+    "esversion": 6,
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "globalstrict": true,
+    "immed": true,
+    "indent": 4,
+    "moz": true,
+    "newcap": true,
+    "noarg": true,
+    "node": true,
+    "noempty": true,
+    "nonew": true,
+    "trailing": true,
+    "undef": true,
+    "smarttabs": true,
+    "strict": true,
+    "validthis": true,
+    "globals": {
+      "describe": false,
+      "it": false,
+      "before": false,
+      "beforeEach": false,
+      "after": false,
+      "afterEach": false
+    }
+  }
+}
