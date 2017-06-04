@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/tcort/internet-poker-protocol#readme",
   "dependencies": {
+    "byline": "^5.0.0",
     "extend": "^3.0.1",
     "pegjs": "^0.10.0"
   },
