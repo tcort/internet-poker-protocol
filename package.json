@@ -25,7 +25,8 @@
   "dependencies": {
     "byline": "^5.0.0",
     "extend": "^3.0.1",
-    "pegjs": "^0.10.0"
+    "pegjs": "^0.10.0",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
