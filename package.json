@@ -24,6 +24,7 @@
   "homepage": "https://github.com/tcort/internet-poker-protocol#readme",
   "dependencies": {
     "byline": "^5.0.0",
+    "deckofcards": "^1.2.0",
     "extend": "^3.0.1",
     "pegjs": "^0.10.0",
     "uuid": "^3.0.1"

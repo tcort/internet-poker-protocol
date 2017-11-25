@@ -1,6 +1,7 @@
 # internet-poker-protocol
 
-Module for parsing and creating Internet Poker Protocol 2.0 messages.
+Module for parsing and creating Internet Poker Protocol 2.0 messages
+as well has evaluating poker hands.
 
 ## Installation
 
@@ -8,10 +9,7 @@ Module for parsing and creating Internet Poker Protocol 2.0 messages.
 
 ## Status
 
-This is very much alpha quality software. There is the potential for big
-changes. At present, protocol messages and be parsed and stringified and
-there is a Client module to handle the the low level networking. More
-work remains. When the dust has settled, the API will be documented.
+Some work remains. When the dust has settled, the API will be documented.
 
 ## Testing
 
