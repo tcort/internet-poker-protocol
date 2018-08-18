@@ -25,14 +25,14 @@
   "dependencies": {
     "byline": "^5.0.0",
     "deckofcards": "^1.2.0",
-    "extend": "^3.0.1",
+    "extend": "^3.0.2",
     "pegjs": "^0.10.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "jshint": "^2.9.4",
-    "mocha": "^3.4.2"
+    "jshint": "^2.9.6",
+    "mocha": "^5.2.0"
   },
   "jshintConfig": {
     "esversion": 6,
